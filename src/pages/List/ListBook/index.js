@@ -3,13 +3,21 @@ import PropTypes from 'prop-types';
 
 import { navigate } from '~/services/navigation';
 
-import { TouchableOpacity, Image } from 'react-native';
+import {
+  TouchableOpacity, Image, View, Text,
+} from 'react-native';
 
 import styles from './styles';
 
 const ListBook = ({ book }) => (
   <TouchableOpacity style={styles.container} onPress={() => navigate('Detail', { book })}>
-    <Image style={styles.image} source={{ uri: book.volumeInfo.imageLinks.thumbnail }} />
+    {book.volumeInfo.imageLinks ? (
+      <Image style={styles.image} source={{ uri: book.volumeInfo.imageLinks.thumbnail }} />
+    ) : (
+      <View style={styles.title}>
+        <Text>{book.volumeInfo.title}</Text>
+      </View>
+    )}
   </TouchableOpacity>
 );
 
